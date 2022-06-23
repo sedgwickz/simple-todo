@@ -1,6 +1,5 @@
 <template>
   <div class="search-box">
-    <!-- <input type="text" @keyup.enter="handleAdd" /> -->
     <TodoField />
   </div>
   <div class="todo-list">
