@@ -34,7 +34,7 @@ function handleAdd(e: Event) {
   border: none;
   border-bottom: 1px solid #ddd;
   font-size: 18px;
-  width: 100%;
+  width: calc(100% - 24px);
   text-align: center;
   padding: 12px;
   margin: 30px 0;

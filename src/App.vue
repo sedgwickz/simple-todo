@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import TodoList from './views/TodoList/index.vue'
+import TodoList from "./views/TodoList/index.vue";
 </script>
 
 <template>
-  <div class="logo">Simple Todo</div>
+  <div class="logo"><h1>Simple Todo</h1></div>
   <div class="container">
     <TodoList />
   </div>
@@ -15,7 +15,7 @@ import TodoList from './views/TodoList/index.vue'
 }
 
 .logo {
-  font-size: 30px;
+  font-size: 20px;
 }
 
 .container {
