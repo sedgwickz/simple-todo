@@ -13,10 +13,10 @@
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from "pinia";
-import { useStore } from "@/store";
 import TodoField from "@/components/TodoField.vue";
 import TodoItem from "@/components/TodoItem.vue";
+import { useStore } from "@/store";
+import { storeToRefs } from "pinia";
 
 const store = useStore();
 const { items } = storeToRefs(store);
