@@ -5,7 +5,7 @@
   <transition-group name="list" tag="div">
     <TodoItem
       class="item"
-      v-for="item in items"
+      v-for="item in store.items"
       :key="item.createAt.toString()"
       :item="item"
     />
@@ -20,7 +20,7 @@ import { storeToRefs } from "pinia";
 import { onMounted } from "vue";
 
 const store = useStore();
-const { items } = storeToRefs(store);
+//const { items } = storeToRefs(store);
 onMounted(() => {
   store.getItems();
 });

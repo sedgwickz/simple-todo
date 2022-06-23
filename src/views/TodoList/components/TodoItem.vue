@@ -2,7 +2,7 @@
   <div class="todo-item">
     <div>
       <div class="text">{{ item.text }}</div>
-      <div class="time">{{ item.createAt }}</div>
+      <div class="time">{{ moment(item.createAt).fromNow() }}</div>
     </div>
     <div>
       <svg
@@ -28,11 +28,12 @@
 <script setup lang="ts">
 import type { TodoItemType } from "@/types/todo";
 import { useStore } from "@/store";
+import moment from "moment";
+
 interface Props {
   item: TodoItemType;
 }
 const { item } = defineProps<Props>();
-
 const store = useStore();
 </script>
 <style scoped lang="less">
