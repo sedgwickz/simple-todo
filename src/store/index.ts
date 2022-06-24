@@ -7,7 +7,7 @@ export const useStore = defineStore("main", {
   state: (): TodoItemListType => ({ items: [] }),
   actions: {
     getItems() {
-      this.sync();
+      this.items = JSON.parse(localStorage.getItem(TODO_KEY)!);
       return this.items;
     },
     addItem(item: TodoItemType) {
@@ -19,13 +19,7 @@ export const useStore = defineStore("main", {
       this.sync();
     },
     sync() {
-      if (this.items.length) {
-        localStorage.setItem(TODO_KEY, JSON.stringify(this.items));
-        return;
-      }
-      if (localStorage.getItem(TODO_KEY)) {
-        this.items = JSON.parse(localStorage.getItem(TODO_KEY)!);
-      }
+      localStorage.setItem(TODO_KEY, JSON.stringify(this.items));
     },
   },
 });
