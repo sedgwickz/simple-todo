@@ -13,14 +13,12 @@
 </template>
 
 <script setup lang="ts">
+import { useStore } from "@/store";
+import { onMounted } from "vue";
 import TodoField from "./components/TodoField.vue";
 import TodoItem from "./components/TodoItem.vue";
-import { useStore } from "@/store";
-import { storeToRefs } from "pinia";
-import { onMounted } from "vue";
 
 const store = useStore();
-//const { items } = storeToRefs(store);
 onMounted(() => {
   store.getItems();
 });

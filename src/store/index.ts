@@ -4,7 +4,7 @@ import { defineStore } from "pinia";
 const TODO_KEY = "todos";
 
 export const useStore = defineStore("main", {
-  state: () => ({ items: [] } as TodoItemListType),
+  state: (): TodoItemListType => ({ items: [] }),
   actions: {
     getItems() {
       this.sync();
