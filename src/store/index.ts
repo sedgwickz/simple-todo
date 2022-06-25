@@ -11,7 +11,6 @@ export const useStore = defineStore("main", {
       return this.items;
     },
     addItem(item: TodoItemType) {
-      console.log(this.items);
       this.items.unshift(item);
       this.sync();
     },
