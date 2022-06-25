@@ -4,7 +4,7 @@
       ref="inputRef"
       type="input"
       class="input-box"
-      placeholder="写点什么"
+      placeholder="写点什么吧，回车即可添加"
       name="name"
       id="name"
       required

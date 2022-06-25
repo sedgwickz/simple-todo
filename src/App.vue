@@ -37,9 +37,9 @@ import TodoList from "./views/TodoList/index.vue";
   ></a>
 
   <div class="logo"><h1>Simple Todo</h1></div>
-  <div class="container">
+  <main class="container">
     <TodoList />
-  </div>
+  </main>
 </template>
 
 <style>

@@ -6,11 +6,12 @@ const TODO_KEY = "todos";
 export const useStore = defineStore("main", {
   state: (): TodoItemListType => ({ items: [] }),
   actions: {
-    getItems() {
-      this.items = JSON.parse(localStorage.getItem(TODO_KEY)!);
+    getItems(): TodoItemType[] {
+      this.items = JSON.parse(localStorage.getItem(TODO_KEY) || "[]");
       return this.items;
     },
     addItem(item: TodoItemType) {
+      console.log(this.items);
       this.items.unshift(item);
       this.sync();
     },
