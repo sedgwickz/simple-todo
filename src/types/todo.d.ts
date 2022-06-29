@@ -1,5 +1,6 @@
 export interface TodoItemType {
   text: string
+  id: string
   createAt: Date
 }
 

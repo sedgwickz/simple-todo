@@ -10,6 +10,7 @@
   "dependencies": {
     "moment": "^2.29.3",
     "pinia": "^2.0.14",
+    "uuid": "^8.3.2",
     "vconsole": "^3.14.6",
     "vue": "^3.2.25"
   },

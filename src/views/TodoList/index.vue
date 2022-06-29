@@ -6,7 +6,7 @@
     <TodoItem
       class="item"
       v-for="item in store.items"
-      :key="item.createAt.toString()"
+      :key="item.id"
       :item="item"
     />
   </transition-group>

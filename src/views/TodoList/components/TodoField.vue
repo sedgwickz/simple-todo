@@ -15,13 +15,14 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useStore } from "@/store";
+import { v4 as uuidv4 } from 'uuid';
 
 const store = useStore();
 const inputRef = ref<HTMLInputElement | null>(null);
 function handleAdd(e: Event) {
   let value = (e.target as HTMLInputElement).value;
   if (value) {
-    store.addItem({ text: value, createAt: new Date() });
+    store.addItem({ text: value, createAt: new Date(), id: uuidv4() });
     if (inputRef.value) inputRef.value.value = "";
   }
 }
