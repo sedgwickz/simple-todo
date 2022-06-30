@@ -3,11 +3,12 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vue-tsc --noEmit && vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/uuid": "^8.3.4",
     "moment": "^2.29.3",
     "pinia": "^2.0.14",
     "uuid": "^8.3.2",

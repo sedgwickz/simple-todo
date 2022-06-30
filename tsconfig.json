@@ -13,6 +13,7 @@
     "lib": ["esnext", "dom"],
     "skipLibCheck": true,
     "baseUrl": ".",
+    "types": ["vite-plugin-pwa/client"],
     "paths": {
       "@/*": ["src/*"]
     }
