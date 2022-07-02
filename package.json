@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vue-tsc --noEmit && vite",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "serve": "vite preview",
+    "https-preview": "serve dist"
   },
   "dependencies": {
     "@types/uuid": "^8.3.4",
