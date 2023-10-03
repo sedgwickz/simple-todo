@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@types/uuid": "^9.0.4",
+    "common-style": "github:sedgwickz/common-style",
     "moment": "^2.29.4",
     "pinia": "^2.1.6",
     "uuid": "^9.0.1",
@@ -21,6 +22,7 @@
     "@vitejs/plugin-vue": "^4.4.0",
     "https-localhost": "^4.7.1",
     "less": "^4.2.0",
+    "sass": "^1.68.0",
     "typescript": "^5.2.2",
     "vite": "^4.4.9",
     "vite-plugin-pwa": "^0.16.5",
