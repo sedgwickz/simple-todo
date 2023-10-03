@@ -99,4 +99,13 @@ function handleDeleteBook(id: string) {
   opacity: 0;
   transform: translateX(30px);
 }
+
+.mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba($color: #000000, $alpha: 0.7);
+}
 </style>
