@@ -51,7 +51,7 @@ function handleDeleteBook(id: string) {
         <div>{{ book.title }}<img @click.stop="handleDeleteBook(book.id)" class="w-3 h-3 ml-2" :src="deleteImage" /></div>
       </div>
     </div>
-    <div v-if="leftWidth" class="mask" @click="togglePanel"></div>
+    <div v-if="leftWidth" class="mask md_hidden" @click="togglePanel"></div>
     <div class="flex-1 flex flex-column max-h100 scroll-y">
       <div class="flex align-center g-2 p-6">
         <div>
@@ -63,7 +63,7 @@ function handleDeleteBook(id: string) {
         <h1>{{ store.currentBook?.title }}</h1>
       </div>
       <main class="p-3 flex-1 md_p-16">
-        <div class="search-box">
+        <div class="search-box md_px-16">
           <TodoField />
         </div>
         <transition-group name="list" tag="div">
