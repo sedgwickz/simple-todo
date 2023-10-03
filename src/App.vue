@@ -20,10 +20,10 @@ function handleAddBook() {
 }
 
 function onInput(e: any) {
-  if (!e.target.textContent) {
+  if (!e.target.value) {
     return
   }
-  store.updateBook(e.target.textContent)
+  store.updateBook(e.target.value)
 }
 
 function handleChangeBook(id: string) {
@@ -59,8 +59,9 @@ function handleDeleteBook(id: string) {
         </div>
         <div><strong>Simple</strong> TODO</div>
       </div>
-      <div class="f-20 b-0" contenteditable="true" @input="onInput">
-        <h1>{{ store.currentBook?.title }}</h1>
+      <div>
+        <input class="mt-12 f-48" style="border: 0; outline: 0; text-align: center;" :value="store.currentBook?.title"
+          placeholder="填写标题" @input="onInput" />
       </div>
       <main class="p-3 flex-1 md_p-16">
         <div class="search-box md_px-16">
