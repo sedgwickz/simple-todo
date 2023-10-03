@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input type="input" class="input-box" placeholder="写点什么吧，回车即可添加" name="name" v-model="content" id="name" required
+    <input class="input-box" placeholder="写点什么吧，回车即可添加" name="name" v-model="content" id="name" required
       @keyup.enter="handleAdd" />
   </div>
 </template>
@@ -11,12 +11,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 const content = ref('')
 const store = useStore();
-const inputRef = ref<HTMLInputElement | null>(null);
 function handleAdd(e: Event) {
   if (!content.value.trim()) {
     return
   }
-  store.addItem({ text: content.value, createAt: new Date(), id: uuidv4() });
+  store.addTodo(content.value);
   content.value = ''
 }
 </script>

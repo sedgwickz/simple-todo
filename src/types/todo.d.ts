@@ -1,9 +1,13 @@
-export interface TodoItemType {
+export interface Todo {
   text: string
   id: string
-  createAt: Date
+  createAt: string
 }
 
-export interface TodoItemListType {
-  items: TodoItemType[]
+export interface Book {
+  id: string
+  title: string
+  selected: boolean
+  createdAt: string
+  items: Todo[]
 }
