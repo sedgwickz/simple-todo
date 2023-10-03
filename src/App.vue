@@ -19,7 +19,7 @@ function handleAddBook() {
   store.addBook()
 }
 
-function onInput(e) {
+function onInput(e: any) {
   if (!e.target.textContent) {
     return
   }

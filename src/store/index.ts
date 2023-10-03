@@ -1,35 +1,11 @@
-import { Book, Todo } from './../types/todo.d'
 import { defineStore } from 'pinia'
-import { onMounted, ref } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
-import moment from 'moment'
-
-const TODO_KEY = 'todos'
-
-// export const useStore = defineStore("main", {
-//   state: (): Book[] => ([]),
-//   actions: {
-//     getItems(): TodoItemType[] {
-//       this.items = JSON.parse(localStorage.getItem(TODO_KEY) || "[]");
-//       return this.items;
-//     },
-//     addItem(item: TodoItemType) {
-//       this.items.unshift(item);
-//       this.sync();
-//     },
-//     deleteItem(item: TodoItemType) {
-//       this.items.splice(this.items.indexOf(item), 1);
-//       this.sync();
-//     },
-//     sync() {
-//       localStorage.setItem(TODO_KEY, JSON.stringify(this.items));
-//     },
-//   },
-// });
+import { ref } from 'vue'
+import { Book, Todo } from './../types/todo.d'
 
 export const useStore = defineStore('main', () => {
   const books = ref<Book[]>([])
-  const currentBook = ref<Book | null>(null)
+  const currentBook = ref<Book>()
 
   try {
     books.value = JSON.parse(localStorage.getItem('simple-todo-list') || '[]')
@@ -76,13 +52,13 @@ export const useStore = defineStore('main', () => {
       id: uuidv4(),
       createAt: new Date().toString(),
     }
-    currentBook.value.items = [todo, ...currentBook.value?.items]
+    currentBook.value!.items = [todo, ...(currentBook.value?.items || [])]
     console.log(JSON.stringify(currentBook.value))
     sync()
   }
 
   function removeTodo(id: string) {
-    currentBook.value.items = currentBook.value.items.filter(
+    currentBook.value!.items = currentBook.value!.items.filter(
       (item) => item.id !== id
     )
     sync()
@@ -90,7 +66,7 @@ export const useStore = defineStore('main', () => {
 
   function updateBook(title: string) {
     books.value.map((item) => (item.selected = false))
-    currentBook.value = { ...currentBook.value, title, selected: true }
+    currentBook.value = { ...currentBook.value, title, selected: true } as Book
     const index = books.value.findIndex(
       (item) => item.id === currentBook.value?.id
     )
