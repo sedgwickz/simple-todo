@@ -1,15 +1,7 @@
 <template>
   <div>
-    <input
-      ref="inputRef"
-      type="input"
-      class="input-box"
-      placeholder="写点什么吧，回车即可添加"
-      name="name"
-      id="name"
-      required
-      @keyup.enter="handleAdd"
-    />
+    <input type="input" class="input-box" placeholder="写点什么吧，回车即可添加" name="name" v-model="content" id="name" required
+      @keyup.enter="handleAdd" />
   </div>
 </template>
 <script setup lang="ts">
@@ -17,20 +9,22 @@ import { ref } from "vue";
 import { useStore } from "@/store";
 import { v4 as uuidv4 } from 'uuid';
 
+const content = ref('')
 const store = useStore();
 const inputRef = ref<HTMLInputElement | null>(null);
 function handleAdd(e: Event) {
-  let value = (e.target as HTMLInputElement).value;
-  if (value) {
-    store.addItem({ text: value, createAt: new Date(), id: uuidv4() });
-    if (inputRef.value) inputRef.value.value = "";
+  if (!content.value.trim()) {
+    return
   }
+  store.addItem({ text: content.value, createAt: new Date(), id: uuidv4() });
+  content.value = ''
 }
 </script>
 <style lang="less" scoped>
 *:focus {
   outline: none;
 }
+
 .input-box {
   border: none;
   border-bottom: 1px solid #ddd;
