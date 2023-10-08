@@ -32,5 +32,9 @@ function handleAdd(e: Event) {
   text-align: center;
   padding: 12px;
   margin: 30px 0;
+
+  &::placeholder {
+    font-size: 18px;
+  }
 }
 </style>

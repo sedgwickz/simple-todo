@@ -60,7 +60,7 @@ function handleDeleteBook(id: string) {
         <div><strong>Simple</strong> TODO</div>
       </div>
       <div>
-        <input class="mt-12 f-48" style="border: 0; outline: 0; text-align: center;" :value="store.currentBook?.title"
+        <input class="mt-12 f-24 md_f-48" style="border: 0; outline: 0; text-align: center; width: 100%;" :value="store.currentBook?.title"
           placeholder="填写标题" @input="onInput" />
       </div>
       <main class="p-3 flex-1 md_p-16">
