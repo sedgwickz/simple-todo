@@ -107,6 +107,7 @@ function handleDeleteBook(id: string) {
   right: 0;
   top: 0;
   bottom: 0;
+  z-index: 10;
   background-color: rgba($color: #000000, $alpha: 0.7);
 }
 </style>
