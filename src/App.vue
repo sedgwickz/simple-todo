@@ -7,7 +7,8 @@
       <div class="p-8">
         <button @click="handleAddBook">添加新清单</button>
       </div>
-      <div class="p-4 pointer flex" v-for="book in store.books" @click="handleChangeBook(book.id)">
+      <div class="book-item p-4 pointer flex" :class="{ active: book.id === store.currentBook?.id }" v-for="book in store.books"
+        @click="handleChangeBook(book.id)">
         <div>{{ book.title }}<img @click.stop="handleDeleteBook(book.id)" class="w-3 h-3 ml-2" :src="deleteImage" /></div>
       </div>
     </div>
@@ -30,10 +31,10 @@
               <TodoField />
             </div>
             <!-- <transition-group name="list" tag="div"> -->
-              <div ref="listRef">
-                <TodoItem class="item" @deleteItem="store.removeTodo(item.id)" v-for="item in store.currentBook?.items"
-                  :key="item.id" :item="item" />
-              </div>
+            <div ref="listRef">
+              <TodoItem class="item" @deleteItem="store.removeTodo(item.id)" v-for="item in store.currentBook?.items"
+                :key="item.id" :item="item" />
+            </div>
             <!-- </transition-group> -->
           </main>
         </div>
@@ -67,7 +68,6 @@ onMounted(() => {
     animation: 150,
     ghostClass: 'item',
     onEnd: (e: any) => {
-      // store.moveTodoItem(e.oldIndex, e.newIndex)
       store.sort(e.oldIndex, e.newIndex)
       console.log(store.currentBook?.items)
     }
@@ -92,11 +92,10 @@ function onInput(e: any) {
 
 function handleChangeBook(id: string) {
   store.setSelect(id);
-  togglePanel()
 }
 
 function handleDeleteBook(id: string) {
-  if (confirm('确定删除该清单吗？')) {
+  if (confirm('delete this book?')) {
     store.removeBook(id)
   }
 }
@@ -126,6 +125,15 @@ function handleDeleteBook(id: string) {
 .list-leave-to {
   opacity: 0;
   transform: translateX(30px);
+}
+
+.book-item {
+  padding: 4px;
+}
+
+.book-item.active {
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .mask {
