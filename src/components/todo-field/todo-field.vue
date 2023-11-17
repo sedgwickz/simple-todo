@@ -1,7 +1,7 @@
 <template>
   <div>
-    <input class="input-box" placeholder="写点什么吧，回车即可添加" name="name" v-model="content" id="name" required
-      @keyup.enter="handleAdd" />
+    <input class="input-box" autocomplete="off" placeholder="写点什么吧，回车即可添加" name="name" v-model="content" id="name"
+      required @keyup.enter="handleAdd" />
   </div>
 </template>
 <script setup lang="ts">
