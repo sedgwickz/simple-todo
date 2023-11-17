@@ -1,11 +1,12 @@
 <template>
   <div class="todo-item">
     <div>
-      <div class="text">{{ item.text }}</div>
+      <input ref="inputRef" v-if="isEdit" style="border: 0; outline: 0;" :value="item.text" @blur="handleInputBlur()" />
+      <div v-else class="text">{{ item.text }}</div>
       <div class="time" :title="item.createAt">{{ formatDate(item.createAt) }}</div>
     </div>
     <div class="flex">
-      <div class="mr-2">
+      <div class="item-edit mr-2" @click.stop="handleEdit(item)">
         <svg t="1700213550873" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
           p-id="2438" width="16" height="16">
           <path fill="currentColor"
@@ -22,7 +23,7 @@
         </svg>
       </div>
       <div>
-        <svg @click="deleteItem(item)" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+        <svg @click="handleDelete(item)" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
           aria-hidden="true" role="img" class="iconify iconify--material-symbols" width="16" height="16"
           preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
           <path fill="currentColor"
@@ -38,18 +39,35 @@
 import { useStore } from "@/store";
 import type { Todo } from "@/types/todo";
 import * as timeago from 'timeago.js';
+import { nextTick, ref } from "vue";
 
 const { item } = defineProps<{ item: Todo }>();
 const emit = defineEmits();
 const store = useStore();
+const isEdit = ref(false);
+const inputRef = ref<HTMLInputElement | null>(null)
 
 function formatDate(createdAt: string) {
   return timeago.format(new Date(createdAt));
 }
 
-function deleteItem(item: Todo) {
+function handleDelete(item: Todo) {
   if (confirm('delete this item?')) {
-    emit('deleteItem', item)
+    store.removeTodo(item.id)
+  }
+}
+
+function handleEdit(item: Todo) {
+  isEdit.value = true;
+  nextTick(() => {
+    inputRef.value?.focus();
+  })
+}
+
+function handleInputBlur() {
+  isEdit.value = false;
+  if (inputRef.value?.value) {
+    store.updateTodo(item.id, inputRef.value?.value)
   }
 }
 </script>

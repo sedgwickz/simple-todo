@@ -7,8 +7,8 @@
       <div class="p-8">
         <button @click="handleAddBook">添加新清单</button>
       </div>
-      <div class="book-item p-4 pointer flex" :class="{ active: book.id === store.currentBook?.id }" v-for="book in store.books"
-        @click="handleChangeBook(book.id)">
+      <div class="book-item p-4 pointer flex" :class="{ active: book.id === store.currentBook?.id }"
+        v-for="book in store.books" @click="handleChangeBook(book.id)">
         <div>{{ book.title }}<img @click.stop="handleDeleteBook(book.id)" class="w-3 h-3 ml-2" :src="deleteImage" /></div>
       </div>
     </div>
@@ -32,8 +32,7 @@
             </div>
             <!-- <transition-group name="list" tag="div"> -->
             <div ref="listRef">
-              <TodoItem class="item" @deleteItem="store.removeTodo(item.id)" v-for="item in store.currentBook?.items"
-                :key="item.id" :item="item" />
+              <TodoItem class="item" v-for="item in store.currentBook?.items" :key="item.id" :item="item" />
             </div>
             <!-- </transition-group> -->
           </main>

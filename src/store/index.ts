@@ -46,6 +46,17 @@ export const useStore = defineStore('main', () => {
     sync()
   }
 
+  function updateBook(title: string) {
+    books.value.map((item) => (item.selected = false))
+    currentBook.value = { ...currentBook.value, title, selected: true } as Book
+    const index = books.value.findIndex((item) => item.id === currentBook.value?.id)
+    if (index > -1) {
+      books.value[index] = currentBook.value
+    }
+    console.log('update book finished')
+    sync()
+  }
+
   function addTodo(content: string) {
     const todo = {
       text: content,
@@ -62,15 +73,13 @@ export const useStore = defineStore('main', () => {
     sync()
   }
 
-  function updateBook(title: string) {
-    books.value.map((item) => (item.selected = false))
-    currentBook.value = { ...currentBook.value, title, selected: true } as Book
-    const index = books.value.findIndex((item) => item.id === currentBook.value?.id)
-    if (index > -1) {
-      books.value[index] = currentBook.value
+  function updateTodo(id: string, content: string) {
+    const todo = currentBook.value!.items.find((item) => item.id === id)
+    if (todo) {
+      todo.text = content
+      console.log(currentBook.value)
+      sync()
     }
-    console.log('update book finished')
-    sync()
   }
 
   function setSelect(id: string) {
@@ -100,6 +109,7 @@ export const useStore = defineStore('main', () => {
     updateBook,
     addBook,
     addTodo,
+    updateTodo,
     setSelect,
     removeBook,
     removeTodo,
