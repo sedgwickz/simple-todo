@@ -58,18 +58,14 @@ export const useStore = defineStore('main', () => {
   }
 
   function removeTodo(id: string) {
-    currentBook.value!.items = currentBook.value!.items.filter(
-      (item) => item.id !== id
-    )
+    currentBook.value!.items = currentBook.value!.items.filter((item) => item.id !== id)
     sync()
   }
 
   function updateBook(title: string) {
     books.value.map((item) => (item.selected = false))
     currentBook.value = { ...currentBook.value, title, selected: true } as Book
-    const index = books.value.findIndex(
-      (item) => item.id === currentBook.value?.id
-    )
+    const index = books.value.findIndex((item) => item.id === currentBook.value?.id)
     if (index > -1) {
       books.value[index] = currentBook.value
     }
@@ -87,6 +83,13 @@ export const useStore = defineStore('main', () => {
     sync()
   }
 
+  function sort(oldIndex: number, newIndex: number) {
+    const item = currentBook.value!.items[oldIndex]
+    currentBook.value!.items.splice(oldIndex, 1)
+    currentBook.value!.items.splice(newIndex, 0, item)
+    sync()
+  }
+
   function sync() {
     localStorage.setItem('simple-todo-list', JSON.stringify(books.value))
   }
@@ -100,5 +103,6 @@ export const useStore = defineStore('main', () => {
     setSelect,
     removeBook,
     removeTodo,
+    sort,
   }
 })

@@ -2,7 +2,7 @@
   <div class="todo-item">
     <div>
       <div class="text">{{ item.text }}</div>
-      <div class="time">{{ formatDate(item.createAt) }}</div>
+      <div class="time" :title="item.createAt">{{ formatDate(item.createAt) }}</div>
     </div>
     <div class="flex">
       <div class="mr-2">
@@ -13,7 +13,7 @@
             p-id="2439"></path>
         </svg>
       </div>
-      <div class="mr-2">
+      <div class="item-mover mr-2">
         <svg t="1700213268878" class="icon" width="16" height="16" viewBox="0 0 1024 1024" version="1.1"
           xmlns="http://www.w3.org/2000/svg" p-id="1457">
           <path fill="currentColor"

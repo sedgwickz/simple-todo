@@ -1,51 +1,3 @@
-<script setup lang="ts">
-import panelSwitch from '@/assets/panel-switch.svg';
-import { useStore } from '@/store/index';
-import { onMounted, ref } from "vue";
-import TodoField from "@/components/todo-field/todo-field.vue";
-import TodoItem from "@/components/todo-item/todo-item.vue";
-import deleteImage from '@/assets/delete.svg'
-
-const leftWidth = ref(0)
-const panelMinWidth = document.body.clientWidth / 2 > 256 ? 256 : document.body.clientWidth / 2
-
-const store = useStore()
-
-onMounted(() => {
-  const menuOpen = localStorage.getItem('menuOpen')
-  if (menuOpen === '1') {
-    leftWidth.value = panelMinWidth
-  }
-})
-
-function togglePanel() {
-  leftWidth.value = Math.abs(leftWidth.value - panelMinWidth)
-  localStorage.setItem('menuOpen', leftWidth.value > 0 ? '1' : '0')
-}
-
-function handleAddBook() {
-  store.addBook()
-}
-
-function onInput(e: any) {
-  if (!e.target.value) {
-    return
-  }
-  store.updateBook(e.target.value)
-}
-
-function handleChangeBook(id: string) {
-  store.setSelect(id);
-  togglePanel()
-}
-
-function handleDeleteBook(id: string) {
-  if (confirm('确定删除该清单吗？')) {
-    store.removeBook(id)
-  }
-}
-
-</script>
 
 <template>
   <github-badge />
@@ -77,16 +29,79 @@ function handleDeleteBook(id: string) {
             <div class="search-box md_px-16">
               <TodoField />
             </div>
-            <transition-group name="list" tag="div">
-              <TodoItem class="item" @deleteItem="store.removeTodo(item.id)" v-for="item in store.currentBook?.items"
-                :key="item.id" :item="item" />
-            </transition-group>
+            <!-- <transition-group name="list" tag="div"> -->
+              <div ref="listRef">
+                <TodoItem class="item" @deleteItem="store.removeTodo(item.id)" v-for="item in store.currentBook?.items"
+                  :key="item.id" :item="item" />
+              </div>
+            <!-- </transition-group> -->
           </main>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import panelSwitch from '@/assets/panel-switch.svg';
+import { useStore } from '@/store/index';
+import { onMounted, ref } from "vue";
+import TodoField from "@/components/todo-field/todo-field.vue";
+import TodoItem from "@/components/todo-item/todo-item.vue";
+import deleteImage from '@/assets/delete.svg'
+import Sortable from 'sortablejs';
+
+const leftWidth = ref(0)
+const listRef = ref(null)
+const panelMinWidth = document.body.clientWidth / 2 > 256 ? 256 : document.body.clientWidth / 2
+
+const store = useStore()
+
+onMounted(() => {
+  const menuOpen = localStorage.getItem('menuOpen')
+  if (menuOpen === '1') {
+    leftWidth.value = panelMinWidth
+  }
+  new Sortable(listRef.value!, {
+    handle: '.item-mover',
+    animation: 150,
+    ghostClass: 'item',
+    onEnd: (e: any) => {
+      // store.moveTodoItem(e.oldIndex, e.newIndex)
+      store.sort(e.oldIndex, e.newIndex)
+      console.log(store.currentBook?.items)
+    }
+  })
+})
+
+function togglePanel() {
+  leftWidth.value = Math.abs(leftWidth.value - panelMinWidth)
+  localStorage.setItem('menuOpen', leftWidth.value > 0 ? '1' : '0')
+}
+
+function handleAddBook() {
+  store.addBook()
+}
+
+function onInput(e: any) {
+  if (!e.target.value) {
+    return
+  }
+  store.updateBook(e.target.value)
+}
+
+function handleChangeBook(id: string) {
+  store.setSelect(id);
+  togglePanel()
+}
+
+function handleDeleteBook(id: string) {
+  if (confirm('确定删除该清单吗？')) {
+    store.removeBook(id)
+  }
+}
+
+</script>
 
 <style scope lang="scss">
 #app {
