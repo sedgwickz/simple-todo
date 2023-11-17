@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import panelSwitch from '@/assets/panel-switch.svg';
 import { useStore } from '@/store/index';
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import TodoField from "@/components/todo-field/todo-field.vue";
 import TodoItem from "@/components/todo-item/todo-item.vue";
 import deleteImage from '@/assets/delete.svg'
@@ -11,9 +11,16 @@ const panelMinWidth = document.body.clientWidth / 2 > 256 ? 256 : document.body.
 
 const store = useStore()
 
+onMounted(() => {
+  const menuOpen = localStorage.getItem('menuOpen')
+  if (menuOpen === '1') {
+    leftWidth.value = panelMinWidth
+  }
+})
+
 function togglePanel() {
   leftWidth.value = Math.abs(leftWidth.value - panelMinWidth)
-  console.log(leftWidth.value)
+  localStorage.setItem('menuOpen', leftWidth.value > 0 ? '1' : '0')
 }
 
 function handleAddBook() {
