@@ -1,7 +1,7 @@
 <template>
   <div class="todo-item">
-    <div>
-      <input ref="inputRef" v-if="isEdit" style="border: 0; outline: 0;" :value="item.text" @blur="handleInputBlur()" />
+    <div class="flex-1">
+      <input ref="inputRef" v-if="isEdit" style="border: 0; outline: 0; width: 100%;" :value="item.text" @blur="handleInputBlur()" />
       <div v-else class="text">{{ item.text }}</div>
       <div class="time" :title="item.createAt">{{ formatDate(item.createAt) }}</div>
     </div>
