@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vue-tsc --noEmit && vite",
+    "dev": "vue-tsc --noEmit && vite --host 0.0.0.0",
     "build": "npm run update && vue-tsc --noEmit && vite build",
     "serve": "vite preview",
     "update": "git submodule init && git submodule update",

@@ -2,13 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Simple Todo</title>
     <meta property="og:title" content="Simple Todo" />
-    <meta
-      property="og:description"
-      content="Todo app made by Vue3, Pinia and Typescript"
-    />
+    <meta property="og:description" content="Todo app made by Vue3, Pinia and Typescript" />
     <link rel="icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
     <meta name="theme-color" content="#ffffff" />
@@ -17,4 +14,16 @@
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
+  <script>
+    document.addEventListener(
+      'touchstart',
+      (event) => {
+        if (event.touches && event.touches.length > 1) {
+          // 禁止多指觸控
+          event.preventDefault()
+        }
+      },
+      { passive: false }
+    )
+  </script>
 </html>
