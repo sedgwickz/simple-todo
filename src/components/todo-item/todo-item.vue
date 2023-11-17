@@ -2,7 +2,7 @@
   <div class="todo-item">
     <div>
       <div class="text">{{ item.text }}</div>
-      <div class="time">{{ moment(item.createAt).fromNow() }}</div>
+      <div class="time">{{ formatDate(item.createAt) }}</div>
     </div>
     <div>
       <svg @click="$emit('deleteItem', item)" xmlns="http://www.w3.org/2000/svg"
@@ -18,11 +18,14 @@
 <script setup lang="ts">
 import { useStore } from "@/store";
 import type { Todo } from "@/types/todo";
-import moment from "moment";
-
+import * as timeago from 'timeago.js';
 
 const { item } = defineProps<{ item: Todo }>();
 const store = useStore();
+
+function formatDate(createdAt: string) {
+  return timeago.format(new Date(createdAt));
+}
 </script>
 <style scoped lang="less">
 .todo-item {

@@ -13,6 +13,7 @@ const store = useStore()
 
 function togglePanel() {
   leftWidth.value = Math.abs(leftWidth.value - panelMinWidth)
+  console.log(leftWidth.value)
 }
 
 function handleAddBook() {
@@ -59,19 +60,23 @@ function handleDeleteBook(id: string) {
         </div>
         <div><strong>Simple</strong> TODO</div>
       </div>
-      <div>
-        <input class="mt-12 f-24 md_f-48" style="border: 0; outline: 0; text-align: center; width: 100%;" :value="store.currentBook?.title"
-          placeholder="填写标题" @input="onInput" />
-      </div>
-      <main class="p-3 flex-1 md_p-16">
-        <div class="search-box md_px-16">
-          <TodoField />
+      <div class="flex justify-center">
+        <div class="w100" style="max-width: 800px;">
+          <div>
+            <input class="mt-12 f-24 md_f-48" style="border: 0; outline: 0; text-align: center; width: 100%;"
+              :value="store.currentBook?.title" placeholder="填写标题" @input="onInput" />
+          </div>
+          <main class="p-3 flex-1 md_p-16">
+            <div class="search-box md_px-16">
+              <TodoField />
+            </div>
+            <transition-group name="list" tag="div">
+              <TodoItem class="item" @deleteItem="store.removeTodo(item.id)" v-for="item in store.currentBook?.items"
+                :key="item.id" :item="item" />
+            </transition-group>
+          </main>
         </div>
-        <transition-group name="list" tag="div">
-          <TodoItem class="item" @deleteItem="store.removeTodo(item.id)" v-for="item in store.currentBook?.items"
-            :key="item.id" :item="item" />
-        </transition-group>
-      </main>
+      </div>
     </div>
   </div>
 </template>

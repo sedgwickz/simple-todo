@@ -14,6 +14,7 @@
     "common-style": "github:sedgwickz/common-style",
     "moment": "^2.29.4",
     "pinia": "^2.1.6",
+    "timeago.js": "^4.0.2",
     "uuid": "^9.0.1",
     "vconsole": "^3.15.1",
     "vue": "^3.3.4"
