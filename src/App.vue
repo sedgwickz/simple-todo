@@ -32,7 +32,13 @@
             </div>
             <!-- <transition-group name="list" tag="div"> -->
             <div ref="listRef">
-              <TodoItem class="item" v-for="item in store.currentBook?.items" :key="item.id" :item="item" />
+              <TodoItem class="item" v-for="item in store.currentBook?.items.filter(item => !item.done)" :key="item.id"
+                :item="item" />
+            </div>
+            <div>
+              <TodoItem class="item"
+                v-for="item in store.currentBook?.items.filter(item => item.done).sort((a, b) => a.doneAt! > b.doneAt! ? -1 : 1)"
+                :key="item.id" :item="item" />
             </div>
             <!-- </transition-group> -->
           </main>

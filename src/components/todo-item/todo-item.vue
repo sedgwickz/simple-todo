@@ -1,20 +1,51 @@
 <template>
   <div class="todo-item">
     <div class="flex-1">
-      <input ref="inputRef" v-if="isEdit" style="border: 0; outline: 0; width: 100%;" :value="item.text" @blur="handleInputBlur()" />
-      <div v-else class="text">{{ item.text }}</div>
-      <div class="time" :title="item.createAt">{{ formatDate(item.createAt) }}</div>
+      <textarea ref="inputRef" v-if="isEdit" style="border: 0; outline: 0; width: 100%;" :value="item.text"
+        @blur="handleInputBlur()" />
+      <div v-else class="text" :style="{ 'text-decoration': item.done ? 'line-through' : undefined }"
+        @click.stop="handleEdit()">{{ item.text }}</div>
+      <div class="flex align-center mt-2">
+        <div class="mr-4 flex align-center">
+          <svg t="1700223651687" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            p-id="7033" width="10" height="10">
+            <path
+              d="M512 74.666667C270.933333 74.666667 74.666667 270.933333 74.666667 512S270.933333 949.333333 512 949.333333 949.333333 753.066667 949.333333 512 753.066667 74.666667 512 74.666667z m0 810.666666c-204.8 0-373.333333-168.533333-373.333333-373.333333S307.2 138.666667 512 138.666667 885.333333 307.2 885.333333 512 716.8 885.333333 512 885.333333z"
+              fill="currentColor" p-id="7034"></path>
+            <path
+              d="M695.466667 567.466667l-151.466667-70.4V277.333333c0-17.066667-14.933333-32-32-32s-32 14.933333-32 32v238.933334c0 12.8 6.4 23.466667 19.2 29.866666l170.666667 81.066667c4.266667 2.133333 8.533333 2.133333 12.8 2.133333 12.8 0 23.466667-6.4 29.866666-19.2 6.4-14.933333 0-34.133333-17.066666-42.666666z"
+              fill="currentColor" p-id="7035"></path>
+          </svg>
+          <div class="time mr-2" :title="new Date(item.createAt).toString()">{{ formatDate(item.createAt) }}</div>
+        </div>
+        <div v-if="item.done" class="flex align-center">
+          <svg t="1700221773563" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            p-id="4358" width="10" height="10">
+            <path d="M847.329 255.653l42.426 42.426-475.176 475.176-42.426-42.427z" fill="currentColor" p-id="4359">
+            </path>
+            <path d="M74 514.426L116.426 472l299.107 299.106-42.427 42.427z" fill="currentColor" p-id="4360"></path>
+          </svg>
+          <div class="time" :title="new Date(item.doneAt!).toString()">{{ formatDate(item.doneAt!) }}</div>
+        </div>
+      </div>
     </div>
     <div class="flex">
-      <div class="item-edit mr-2" @click.stop="handleEdit(item)">
-        <svg t="1700213550873" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
-          p-id="2438" width="16" height="16">
-          <path fill="currentColor"
-            d="M257.7 752c2 0 4-0.2 6-0.5L431.9 722c2-0.4 3.9-1.3 5.3-2.8l423.9-423.9c3.9-3.9 3.9-10.2 0-14.1L694.9 114.9c-1.9-1.9-4.4-2.9-7.1-2.9s-5.2 1-7.1 2.9L256.8 538.8c-1.5 1.5-2.4 3.3-2.8 5.3l-29.5 168.2c-1.9 11.1 1.5 21.9 9.4 29.8 6.6 6.4 14.9 9.9 23.8 9.9z m67.4-174.4L687.8 215l73.3 73.3-362.7 362.6-88.9 15.7 15.6-89zM880 836H144c-17.7 0-32 14.3-32 32v36c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-36c0-17.7-14.3-32-32-32z"
-            p-id="2439"></path>
+      <div v-if="item.done" class="item-reset mr-2" title="restore" @click.stop="handleRestore()">
+        <svg t="1700224188569" class="icon " viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+          p-id="10142" width="16" height="16">
+          <path
+            d="M258.56 681.36l-12.704 44.288a16 16 0 0 1-7.616 9.584l-24.752 13.712a14.464 14.464 0 0 1-20.928-16.64l38.128-132.96a11.136 11.136 0 0 1 13.76-7.632l132.976 38.128a14.464 14.464 0 0 1 3.04 26.56l-24.768 13.712a16 16 0 0 1-12.16 1.392l-42.016-12.048a264.112 264.112 0 0 0 468.112-41.76 14.288 14.288 0 0 1 3.296-4.912 263.424 263.424 0 0 0 16.768-92.784c0-90.496-45.536-170.368-114.96-217.92a264.112 264.112 0 0 0-393.808 118.8 14.336 14.336 0 0 1-17.968 8.16l-20.256-7.024a12.352 12.352 0 0 1-7.456-16.192A312.112 312.112 0 0 1 525.696 208c66.112 0 128.256 20.752 179.44 56.736a313.12 313.12 0 0 1 108.656 135.312 311.04 311.04 0 0 1 23.904 119.952c0 172.32-139.68 312-312 312v-0.208h-0.832c-110.96 0-210.768-59.296-266.304-150.432z"
+            fill="currentColor" p-id="10143"></path>
         </svg>
       </div>
-      <div class="item-mover mr-2">
+      <div v-else class="item-done mr-2" title="done" @click.stop="handleDone()">
+        <svg t="1700221773563" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+          p-id="4358" width="16" height="16">
+          <path d="M847.329 255.653l42.426 42.426-475.176 475.176-42.426-42.427z" fill="currentColor" p-id="4359"></path>
+          <path d="M74 514.426L116.426 472l299.107 299.106-42.427 42.427z" fill="currentColor" p-id="4360"></path>
+        </svg>
+      </div>
+      <div v-if="!item.done" class="item-mover mr-2">
         <svg t="1700213268878" class="icon" width="16" height="16" viewBox="0 0 1024 1024" version="1.1"
           xmlns="http://www.w3.org/2000/svg" p-id="1457">
           <path fill="currentColor"
@@ -31,7 +62,6 @@
           </path>
         </svg>
       </div>
-
     </div>
   </div>
 </template>
@@ -40,14 +70,15 @@ import { useStore } from "@/store";
 import type { Todo } from "@/types/todo";
 import * as timeago from 'timeago.js';
 import { nextTick, ref } from "vue";
+import { useToast } from "vue-toast-notification";
 
 const { item } = defineProps<{ item: Todo }>();
-const emit = defineEmits();
 const store = useStore();
 const isEdit = ref(false);
 const inputRef = ref<HTMLInputElement | null>(null)
+const $toast = useToast();
 
-function formatDate(createdAt: string) {
+function formatDate(createdAt: number) {
   return timeago.format(new Date(createdAt));
 }
 
@@ -57,11 +88,26 @@ function handleDelete(item: Todo) {
   }
 }
 
-function handleEdit(item: Todo) {
+function handleEdit() {
+  if (item.done) {
+    return
+  }
   isEdit.value = true;
   nextTick(() => {
     inputRef.value?.focus();
   })
+}
+
+function handleDone() {
+  // if (confirm('mark as finished?')) {
+  store.markTodoDone(item.id)
+  $toast.success('🎉 finished', { duration: 2000, position: 'top' });
+  // }
+}
+
+function handleRestore() {
+  store.restoreTodoDone(item.id)
+  $toast.warning('😅 restored', { duration: 2000, position: 'top' });
 }
 
 function handleInputBlur() {
@@ -86,7 +132,6 @@ function handleInputBlur() {
   }
 
   .time {
-    margin-top: 10px;
     font-size: 10px;
     color: #999;
   }

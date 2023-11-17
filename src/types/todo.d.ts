@@ -1,13 +1,15 @@
 export interface Todo {
   text: string
   id: string
-  createAt: string
+  done: boolean
+  doneAt?: number 
+  createAt: number 
 }
 
 export interface Book {
   id: string
   title: string
   selected: boolean
-  createdAt: string
+  createdAt: number
   items: Todo[]
 }

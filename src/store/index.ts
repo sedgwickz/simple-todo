@@ -25,7 +25,7 @@ export const useStore = defineStore('main', () => {
     const book = {
       title: 'New List',
       id: uuidv4(),
-      createdAt: new Date().toString(),
+      createdAt: Date.now(),
       items: [],
       selected: true,
     }
@@ -61,7 +61,8 @@ export const useStore = defineStore('main', () => {
     const todo = {
       text: content,
       id: uuidv4(),
-      createAt: new Date().toString(),
+      createAt: Date.now(),
+      done: false
     }
     currentBook.value!.items = [todo, ...(currentBook.value?.items || [])]
     console.log(JSON.stringify(currentBook.value))
@@ -77,7 +78,24 @@ export const useStore = defineStore('main', () => {
     const todo = currentBook.value!.items.find((item) => item.id === id)
     if (todo) {
       todo.text = content
-      console.log(currentBook.value)
+      sync()
+    }
+  }
+
+  function markTodoDone(id: string) {
+    const todo = currentBook.value!.items.find((item) => item.id === id)
+    if (todo) {
+      todo.done = true
+      todo.doneAt = Date.now()
+      sync()
+    }
+  }
+
+  function restoreTodoDone(id: string) {
+    const todo = currentBook.value!.items.find((item) => item.id === id)
+    if (todo) {
+      todo.done = false
+      todo.doneAt = undefined
       sync()
     }
   }
@@ -113,6 +131,8 @@ export const useStore = defineStore('main', () => {
     setSelect,
     removeBook,
     removeTodo,
+    markTodoDone,
+    restoreTodoDone,
     sort,
   }
 })

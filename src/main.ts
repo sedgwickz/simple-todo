@@ -4,6 +4,8 @@ import { useRegisterSW } from 'virtual:pwa-register/vue'
 import { createApp } from 'vue'
 import App from './App.vue'
 import GithubBadge from '@/components/github-badge/github-badge.vue'
+import ToastPlugin from 'vue-toast-notification'
+import 'vue-toast-notification/dist/theme-bootstrap.css'
 
 // import.meta.env.DEV && new VConsole();
 
@@ -33,6 +35,7 @@ pinia.use(({ store }) => {
   })
 })
 app.use(pinia)
+app.use(ToastPlugin)
 
 app.component('GithubBadge', GithubBadge)
 
