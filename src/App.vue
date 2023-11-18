@@ -1,6 +1,5 @@
 
 <template>
-  <!-- <github-badge /> -->
   <div class="flex w-full min-h-full">
     <div class="absolute md:relative bottom-0 top-0 left-0 z-900 left-panel bg-gray-800 overflow-hidden text-white"
       :style="{ width: leftWidth + 'px' }">
