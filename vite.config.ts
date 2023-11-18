@@ -11,6 +11,7 @@ export default defineConfig({
     UnoCSS(),
     VitePWA({
       includeAssets: ['favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
+      registerType: 'autoUpdate',
       manifest: {
         name: 'Simple Todo',
         short_name: 'SimpleTodo',
