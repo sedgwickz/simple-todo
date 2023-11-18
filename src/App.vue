@@ -6,9 +6,8 @@
       <LeftPanel></LeftPanel>
     </div>
     <div v-if="leftWidth" class="md:hidden mask" @click="togglePanel"></div>
-    <div class="flex-1 relative max-h-screen overflow-y-auto">
-      <div class="flex fixed z-10 left-0 right-0 top-0 place-content-between p-4 gap-2 bg-white shadow-sm"
-        :class="{ [`left-${leftWidth}px`]: true }">
+    <div class="flex-1 relative max-h-screen overflow-hidden">
+      <div class="flex sticky top-0 left-0 right-0 z-10 place-content-between p-4 gap-2 bg-white shadow-sm">
         <div class="flex gap-2 items-center">
           <div>
             <img @click="togglePanel" class="w-6 h-6 cursor-pointer" :src="panelSwitch" />
@@ -19,7 +18,7 @@
           <a class="i-mdi:github cursor-pointer" target="_blank" href="https://github.com/sedgwickz/simple-todo"></a>
         </div>
       </div>
-      <div class="flex justify-center pt-8">
+      <div class="flex justify-center pt-8 overflow-y-auto max-h-full">
         <div class="w-full max-w-600px">
           <div>
             <input class="mt-12 f-24 text-4xl" style="border: 0; outline: 0; text-align: center; width: 100%;"
@@ -39,6 +38,7 @@
                 v-for="item in store.currentBook?.items.filter(item => item.done).sort((a, b) => a.doneAt! > b.doneAt! ? -1 : 1)"
                 :key="item.id" :item="item" />
             </div>
+            <div class="h-64px"></div>
             <!-- </transition-group> -->
           </main>
         </div>
