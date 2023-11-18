@@ -1,27 +1,33 @@
 
 <template>
   <!-- <github-badge /> -->
-  <div class="flex">
-    <div class="absolute bottom-0 top-0 left-0 z-900 md_relative left-panel bg-gray-800 overflow-hidden text-white"
+  <div class="flex w-full min-h-full">
+    <div class="absolute md:relative bottom-0 top-0 left-0 z-900 left-panel bg-gray-800 overflow-hidden text-white"
       :style="{ width: leftWidth + 'px' }">
       <LeftPanel></LeftPanel>
     </div>
-    <div v-if="leftWidth" class="mask" @click="togglePanel"></div>
-    <div class="flex-1 flex flex-column max-h100 scroll-y">
-      <div class="flex fixed items-center g-2 p-6">
-        <div>
-          <img @click="togglePanel" class="w-6 h-6 cursor-pointer" :src="panelSwitch" />
-        </div>
-        <div><strong>Simple</strong> TODO</div>
-      </div>
-      <div class="flex justify-center">
-        <div class="w100" style="max-width: 800px;">
+    <div v-if="leftWidth" class="md:hidden mask" @click="togglePanel"></div>
+    <div class="flex-1 relative max-h-screen overflow-y-auto">
+      <div class="flex fixed z-10 left-0 right-0 top-0 place-content-between p-4 gap-2 bg-white shadow-sm"
+        :class="{ [`left-${leftWidth}px`]: true }">
+        <div class="flex gap-2 items-center">
           <div>
-            <input class="mt-12 f-24 md_f-48" style="border: 0; outline: 0; text-align: center; width: 100%;"
+            <img @click="togglePanel" class="w-6 h-6 cursor-pointer" :src="panelSwitch" />
+          </div>
+          <div><strong>Simple</strong> TODO</div>
+        </div>
+        <div class="text-xl flex items-center">
+          <a class="i-mdi:github cursor-pointer" target="_blank" href="https://github.com/sedgwickz/simple-todo"></a>
+        </div>
+      </div>
+      <div class="flex justify-center pt-8">
+        <div class="w-full max-w-600px">
+          <div>
+            <input class="mt-12 f-24 text-4xl" style="border: 0; outline: 0; text-align: center; width: 100%;"
               :value="store.currentBook?.title" placeholder="填写标题" @input="onInput" />
           </div>
-          <main class="p-3 flex-1 md_p-16">
-            <div class="search-box md_px-16">
+          <main class="p-3 flex-1">
+            <div class="search-box">
               <TodoField />
             </div>
             <!-- <transition-group name="list" tag="div"> -->
@@ -127,7 +133,7 @@ function onInput(e: any) {
   right: 0;
   top: 0;
   bottom: 0;
-  z-index: 10;
+  z-index: 100;
   background-color: rgba($color: #000000, $alpha: 0.7);
 }
 </style>

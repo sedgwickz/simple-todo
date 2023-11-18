@@ -23,8 +23,10 @@
     "vue-toast-notification": "^3.1.2"
   },
   "devDependencies": {
+    "@iconify-json/mdi": "^1.1.55",
     "@types/node": "^20.8.2",
     "@types/sortablejs": "^1.15.5",
+    "@unocss/preset-icons": "^0.57.5",
     "@vitejs/plugin-vue": "^4.4.0",
     "https-localhost": "^4.7.1",
     "less": "^4.2.0",

@@ -5,8 +5,8 @@
         @blur="handleInputBlur()" />
       <div v-else class="text" :style="{ 'text-decoration': item.done ? 'line-through' : undefined }"
         @click.stop="handleEdit()">{{ item.text }}</div>
-      <div class="flex items-center mt-2">
-        <div class="mr-4 flex items-center">
+      <div class="flex items-center mt-2 gap-4">
+        <div class="flex items-center gap-1">
           <svg t="1700223651687" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
             p-id="7033" width="10" height="10">
             <path
@@ -16,9 +16,9 @@
               d="M695.466667 567.466667l-151.466667-70.4V277.333333c0-17.066667-14.933333-32-32-32s-32 14.933333-32 32v238.933334c0 12.8 6.4 23.466667 19.2 29.866666l170.666667 81.066667c4.266667 2.133333 8.533333 2.133333 12.8 2.133333 12.8 0 23.466667-6.4 29.866666-19.2 6.4-14.933333 0-34.133333-17.066666-42.666666z"
               fill="currentColor" p-id="7035"></path>
           </svg>
-          <div class="time mr-2" :title="new Date(item.createAt).toString()">{{ formatDate(item.createAt) }}</div>
+          <div class="time" :title="new Date(item.createAt).toString()">{{ formatDate(item.createAt) }}</div>
         </div>
-        <div v-if="item.done" class="flex items-center">
+        <div v-if="item.done" class="flex items-center gap-1">
           <svg t="1700221773563" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
             p-id="4358" width="10" height="10">
             <path d="M847.329 255.653l42.426 42.426-475.176 475.176-42.426-42.427z" fill="currentColor" p-id="4359">
@@ -140,7 +140,7 @@ function handleInputBlur() {
     color: #ddd;
 
     &:hover {
-      cursor: cursor-pointer;
+      cursor: pointer;
     }
   }
 }
