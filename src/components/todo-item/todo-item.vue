@@ -5,8 +5,8 @@
         @blur="handleInputBlur()" />
       <div v-else class="text" :style="{ 'text-decoration': item.done ? 'line-through' : undefined }"
         @click.stop="handleEdit()">{{ item.text }}</div>
-      <div class="flex align-center mt-2">
-        <div class="mr-4 flex align-center">
+      <div class="flex items-center mt-2">
+        <div class="mr-4 flex items-center">
           <svg t="1700223651687" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
             p-id="7033" width="10" height="10">
             <path
@@ -18,7 +18,7 @@
           </svg>
           <div class="time mr-2" :title="new Date(item.createAt).toString()">{{ formatDate(item.createAt) }}</div>
         </div>
-        <div v-if="item.done" class="flex align-center">
+        <div v-if="item.done" class="flex items-center">
           <svg t="1700221773563" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
             p-id="4358" width="10" height="10">
             <path d="M847.329 255.653l42.426 42.426-475.176 475.176-42.426-42.427z" fill="currentColor" p-id="4359">
@@ -140,7 +140,7 @@ function handleInputBlur() {
     color: #ddd;
 
     &:hover {
-      cursor: pointer;
+      cursor: cursor-pointer;
     }
   }
 }

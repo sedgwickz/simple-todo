@@ -1,4 +1,6 @@
+import '@unocss/reset/normalize.css'
 import '@/styles/global.scss'
+import 'virtual:uno.css'
 import { createPinia } from 'pinia'
 import { useRegisterSW } from 'virtual:pwa-register/vue'
 import { createApp } from 'vue'

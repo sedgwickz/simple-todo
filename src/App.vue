@@ -1,22 +1,16 @@
 
 <template>
-  <github-badge />
-  <div class="flex h100">
-    <div class="absolute bottom-0 top-0 left-0 z-900 md_relative left-panel gray-800-bg overflow-hidden white"
+  <!-- <github-badge /> -->
+  <div class="flex">
+    <div class="absolute bottom-0 top-0 left-0 z-900 md_relative left-panel bg-gray-800 overflow-hidden text-white"
       :style="{ width: leftWidth + 'px' }">
-      <div class="p-8">
-        <button @click="handleAddBook">添加新清单</button>
-      </div>
-      <div class="book-item p-4 pointer flex" :class="{ active: book.id === store.currentBook?.id }"
-        v-for="book in store.books" @click="handleChangeBook(book.id)">
-        <div>{{ book.title }}<img @click.stop="handleDeleteBook(book.id)" class="w-3 h-3 ml-2" :src="deleteImage" /></div>
-      </div>
+      <LeftPanel></LeftPanel>
     </div>
-    <div v-if="leftWidth" class="mask md_hidden" @click="togglePanel"></div>
+    <div v-if="leftWidth" class="mask" @click="togglePanel"></div>
     <div class="flex-1 flex flex-column max-h100 scroll-y">
-      <div class="flex align-center g-2 p-6">
+      <div class="flex fixed items-center g-2 p-6">
         <div>
-          <img @click="togglePanel" class="w-6 h-6 pointer" :src="panelSwitch" />
+          <img @click="togglePanel" class="w-6 h-6 cursor-pointer" :src="panelSwitch" />
         </div>
         <div><strong>Simple</strong> TODO</div>
       </div>
@@ -54,7 +48,7 @@ import { useStore } from '@/store/index';
 import { onMounted, ref } from "vue";
 import TodoField from "@/components/todo-field/todo-field.vue";
 import TodoItem from "@/components/todo-item/todo-item.vue";
-import deleteImage from '@/assets/delete.svg'
+import LeftPanel from "@/components/left-panel/left-panel.vue";
 import Sortable from 'sortablejs';
 
 const leftWidth = ref(0)
@@ -84,25 +78,11 @@ function togglePanel() {
   localStorage.setItem('menuOpen', leftWidth.value > 0 ? '1' : '0')
 }
 
-function handleAddBook() {
-  store.addBook()
-}
-
 function onInput(e: any) {
   if (!e.target.value) {
     return
   }
   store.updateBook(e.target.value)
-}
-
-function handleChangeBook(id: string) {
-  store.setSelect(id);
-}
-
-function handleDeleteBook(id: string) {
-  if (confirm('delete this book?')) {
-    store.removeBook(id)
-  }
 }
 
 </script>
